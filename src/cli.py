@@ -7,17 +7,15 @@ from importlib import import_module
 class CLI:
 
     def __init__(self):
-        
-        parser = ArgumentParser()
 
+        parser = ArgumentParser()
         for arg in ("id", "format", "template", "output"):
-            
             parser.add_argument(
                 f"-{arg[0]}", f"--{arg}",
                 action   = "store",
                 required = True
             )
-
+        
         self.args = parser.parse_args().__dict__
 
     def __main__(self) -> None:
@@ -33,8 +31,7 @@ class CLI:
         except ModuleNotFoundError:
             raise Exception(f"invalid format: \"{self.args["format"]}\"")
         
-        for token in (mod := modl.Format(self.args["template"])).get():
-                
+        for token in (mod := modl.Format(self.args["template"])).get():    
             pack  = TMC.pack(token)
             sets += [{**pack,
                 "eval": {
@@ -44,6 +41,5 @@ class CLI:
             
         mod.set(self.args["output"], sets)
         
-
 if __name__ == "__main__":
     (_ := CLI()).__main__()

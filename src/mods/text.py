@@ -13,8 +13,6 @@ class Module:
     @staticmethod
     def plural(_, value: int, single: object, multi: object) -> object:
         "support plurality e.g. 'user' vs 'users'"
-
         if value == 1:
             return single
-        
         return multi

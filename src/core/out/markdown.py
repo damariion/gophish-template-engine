@@ -32,19 +32,17 @@ class Format:
 
         if (dumps.count(self.into) + dumps.count(self.exit)) % 2 != 0:
             raise SyntaxError(f"odd token-syntax: \"{self.path}\"")
-
         return array
 
     def set(self, path: str, packs: list[dict]) -> None:
         
         for pack in packs:
-            
+
             # reapply terminators
             pack["text"] = self.into + \
                 pack['text'] + self.exit
 
-            if type(pack["eval"]) == bytes:     
-                
+            if type(pack["eval"]) == bytes:
                 pack["eval"] = (
                     r"![](data:image/png;base64,"
                     f"{b64encode(pack["eval"]).decode()})"

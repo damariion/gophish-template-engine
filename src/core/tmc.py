@@ -15,7 +15,6 @@ class TMC:
         }
         
         if len(seg := ret["neat"].split(':', 1)) > 1:
-            
             ret["type"] = "expr" 
             ret["func"] = seg[0].strip()
             ret["args"] = [*map(str.strip, seg[-1].split(','))]
@@ -32,10 +31,8 @@ class TMC:
             return path
 
         try:
-
             if len(keys := path.split('.')) == 1:
-                ret = data[path]
-                    
+                ret = data[path]      
             else:        
                 for key in keys:
                     data = data[key]
@@ -47,7 +44,6 @@ class TMC:
         
         except (TypeError, KeyError):
             raise SyntaxError(f"invalid token: \"{path}\"")
-        
         except AssertionError:
             raise SyntaxError(f"disallowed token: \"{path}\"")
 

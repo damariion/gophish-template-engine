@@ -19,7 +19,6 @@ class API:
         auth = {"headers":{"Authorization": cls.auth}, "verify":0}
 
         with redirect_stderr(None):
-            
             if (response := get(path, **auth)).ok:
                 return cls.tzoning(loads(response.text))
             else:
@@ -37,7 +36,7 @@ class API:
             try: 
                 data[key] = datetime.fromisoformat(f"{val}")\
                     .astimezone(cls.zone).isoformat()
-            except:   
+            except:
                 data[key] = val
             
         return data

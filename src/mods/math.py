@@ -10,6 +10,5 @@ class Module:
     @staticmethod
     def pct(_, a: int, b: int) -> str:
         "retrieve ratio"
-
         return f"{int(a) / int(b) * 100:.2f}" \
             if all([a, b]) else '0'
